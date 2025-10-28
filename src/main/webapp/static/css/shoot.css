@@ -52,15 +52,33 @@
     transform: translateY(0);
 }
 
-.error-message {
-    color: #FF6B6B;
-    font-size: 12px;
-    margin-top: 5px;
-    text-align: center;
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    min-height: 60vh;
+}
+
+.input-div,
+.graph-div,
+.table-div{
+    flex: 1;
+    min-width: 0;
+    max-width: calc(33.333% - 20px);
+    display: flex;
+    flex-direction: column;
 }
 
 .input-div {
-    margin-left: 20px;
+    margin-left: 0;
+}
+
+.graph-div {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 #graph {
@@ -70,4 +88,17 @@
     border-radius: 10px;
     background: #f8f9fa;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.table-div {
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+    padding: 20px;
+    height: 400px;
+    overflow-y: auto;
+}
+
+.content > div {
+    display: flex;
+    justify-content: center;
 }
