@@ -8,6 +8,7 @@
         <navigation-case>
             <from-outcome>goToShootPage</from-outcome>
             <to-view-id>shoot.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
 
@@ -16,6 +17,7 @@
         <navigation-case>
             <from-outcome>goToIndexPage</from-outcome>
             <to-view-id>index.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
 </faces-config>

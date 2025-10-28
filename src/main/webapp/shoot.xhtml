@@ -1,20 +1,47 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Simple Facelet Page</title>
-</head>
-<body>
+      xmlns:p="http://primefaces.org/ui">
 
+<h:head>
+    <title>Лабораторная работа #3</title>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css" />
+</h:head>
 
-<h:form>
-    <h:outputLabel for="name" value=""/>
-    <h:inputText id="name" value=""/>
-    <h:commandButton value="Submit" action=""/>
-</h:form>
+<h:body>
+    <div class="header">
+        <div class="logo-section">
+            <span class="logo">Лаб. 3</span>
+            <div class="nav-section">
+                <h:form>
+                    <p:commandLink value="Время" action="goToIndexPage" styleClass="nav-item" ajax="false"/>
+                </h:form>
+                <p:commandLink value="Тир" styleClass="nav-item active" ajax="true"/>
+            </div>
+        </div>
 
+        <div class="name-section">
+            <h:outputText value="Стариковым Арсением Дмитриевичем"/>
+        </div>
 
-</body>
+        <div class="controls-section">
+            <h:outputText value="Вариант 1716" styleClass="variant-label"/>
+            <h:outputText value="Группа P3213" styleClass="group-label"/>
+        </div>
+    </div>
+
+    <div class="content">
+        <div>
+
+        </div>
+        <div class="content">
+
+        </div>
+        <div class="div">
+        </div>
+    </div>
+
+    <div class="footer">
+    </div>
+</h:body>
 </html>
