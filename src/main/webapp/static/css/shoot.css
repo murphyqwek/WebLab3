@@ -63,3 +63,11 @@
     margin-left: 20px;
 }
 
+#graph {
+    width: 400px;
+    height: 400px;
+    border: 2px solid #3498db;
+    border-radius: 10px;
+    background: #f8f9fa;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
