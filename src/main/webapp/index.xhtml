@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Лабораторная работа #3</title>
+    <style>
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            border-bottom: 3px solid #3498db;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .nav-section {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-item {
+            color: #ecf0f1;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            background: rgba(52, 152, 219, 0.2);
+            color: #3498db;
+        }
+
+        .nav-item.active {
+            background: #3498db;
+            color: white;
+        }
+
+        .controls-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .content {
+            display: flex;
+            flex: 1;
+            padding: 20px;
+            background: #ecf0f1;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer {
+            background: #34495e;
+            font-size: large;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .picture-div {
+            flex: 1;
+        }
+
+        .watch-div {
+            flex: 1;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <div class="header">
+        <div class="logo-section">
+            <span class="logo">Лаб. 3</span>
+            <div class="nav-section">
+                <p:commandLink value="Время" styleClass="nav-item active" immediate="true" update="@none"/>
+                <p:commandLink value="Тир" styleClass="nav-item" immediate="true" update="@none"/>
+            </div>
+        </div>
+
+        <div class="controls-section">
+            <h:outputText value="1716" styleClass="variant-label"/>
+            <h:outputText value="P3213" styleClass="group-label"/>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="picture-div">
+
+        </div>
+        <div class="watch-div">
+
+        </div>
+        <div class="picture-div">
+            <h:graphicImage value="static/pictures/spooky.png" width="300" height="300" alt="Helloween"/>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h:outputText value="Сделано Стариковым Арсением Дмитриевичем"/>
+    </div>
+</h:body>
+</html>
