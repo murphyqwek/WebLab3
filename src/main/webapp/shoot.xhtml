@@ -37,17 +37,18 @@
         <div class="input-div">
             <h:form>
                 <div class="form-group">
-                    <label class="form-label">Выберите X: <h:outputText /></label>
+                    <label class="form-label">Выберите X:  <h:outputText id="xValueInput" /></label>
                     <div class="slider-container">
                         <p:slider id="xSlider"
                                   minValue="-5"
                                   maxValue="5"
                                   step="1"
                                   style="width: 100%"
+                                  display="xValueInput"
                                   for="xValue"
                         />
+                        <h:inputHidden id="xValue"/>
                     </div>
-                    <h:inputHidden id="xValue"/>
                 </div>
 
                 <div class="form-group">
