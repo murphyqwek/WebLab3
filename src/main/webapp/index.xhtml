@@ -13,8 +13,10 @@
         <div class="logo-section">
             <span class="logo">Лаб. 3</span>
             <div class="nav-section">
-                <p:commandLink value="Время" styleClass="nav-item active" immediate="true" update="@none"/>
-                <p:commandLink value="Тир" styleClass="nav-item" immediate="true" update="@none"/>
+                <p:commandLink value="Время" styleClass="nav-item active" ajax="true"/>
+                <h:form>
+                    <p:commandLink value="Тир" action="goToShootPage" styleClass="nav-item" ajax="false"/>
+                </h:form>
             </div>
         </div>
 
