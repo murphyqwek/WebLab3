@@ -33,6 +33,12 @@
             gap: 15px;
         }
 
+        .name-section {
+            font-size: large;
+            display: flex;
+            align-items: center;
+        }
+
         .logo {
             font-size: 24px;
             font-weight: bold;
@@ -88,16 +94,42 @@
         }
 
         .picture-div {
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             flex: 1;
         }
 
-        .watch-div {
+        .watch-container {
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            flex: 1;
+            min-height: 300px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 20px;
+            text-align: center;
         }
+
+        .time-display {
+            font-size: 3.5em;
+            font-weight: bold;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .date-display {
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+
     </style>
 </h:head>
 
@@ -111,9 +143,13 @@
             </div>
         </div>
 
+        <div class="name-section">
+            <h:outputText value="Стариковым Арсением Дмитриевичем"/>
+        </div>
+
         <div class="controls-section">
-            <h:outputText value="1716" styleClass="variant-label"/>
-            <h:outputText value="P3213" styleClass="group-label"/>
+            <h:outputText value="Вариант 1716" styleClass="variant-label"/>
+            <h:outputText value="Группа P3213" styleClass="group-label"/>
         </div>
     </div>
 
@@ -121,8 +157,16 @@
         <div class="picture-div">
             <h:graphicImage value="static/pictures/uni.gif" width="300" height="300" alt="UNI!!!!"/>
         </div>
-        <div class="watch-div">
+        <div class="watch-container">
+            <h2>Часы</h2>
 
+            <div class="date-display" id="dateDisplay">
+                Загрузка даты...
+            </div>
+
+            <div class="time-display" id="timeDisplay">
+                Загрузка времени...
+            </div>
         </div>
         <div class="picture-div">
             <h:graphicImage value="static/pictures/spooky.png" width="300" height="300" alt="Helloween"/>
@@ -130,7 +174,38 @@
     </div>
 
     <div class="footer">
-        <h:outputText value="Сделано Стариковым Арсением Дмитриевичем"/>
     </div>
+    <script>
+        function updateClock() {
+            var now = new Date();
+
+            // Форматируем время
+            var hours = now.getHours().toString().padStart(2, '0');
+            var minutes = now.getMinutes().toString().padStart(2, '0');
+            var seconds = now.getSeconds().toString().padStart(2, '0');
+            var timeString = hours + ':' + minutes + ':' + seconds;
+
+            // Форматируем дату
+            var options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            };
+            var dateString = now.toLocaleDateString('ru-RU', options);
+
+            // Обновляем отображение
+            document.getElementById('timeDisplay').textContent = timeString;
+            document.getElementById('dateDisplay').textContent = dateString;
+
+            console.log('Часы обновлены: ' + timeString);
+        }
+
+        // Обновляем сразу при загрузке
+        updateClock();
+
+        // Обновляем каждые 13 секунд
+        setInterval(updateClock, 13000);
+    </script>
 </h:body>
 </html>
