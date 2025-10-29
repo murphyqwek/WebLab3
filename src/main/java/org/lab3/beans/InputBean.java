@@ -1,6 +1,7 @@
 package org.lab3.beans;
 import jakarta.enterprise.context.ConversationScoped;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import java.io.Console;
@@ -11,9 +12,12 @@ import java.io.Serializable;
 public class InputBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Inject
+    private HitCheckBean hitCheckBean;
+
     private int x;
     private float y;
-    private int r;
+    private int r = 1;
     private String testString;
 
     public int getX() {
@@ -45,7 +49,7 @@ public class InputBean implements Serializable {
     }
 
     public void submit() {
-        testString = String.format("x: %d, y: %f, r:%d", x, y, r);
+        testString = hitCheckBean.isHit(x, y, r) ? "Попал" : "Не попал";
         System.out.println(testString);
     }
 }
