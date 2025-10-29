@@ -30,9 +30,4 @@
     } else {
         initGraphFromSelectedRadio();
     }
-
-    // Поддержка AJAX в PrimeFaces
-    if (typeof window.PrimeFaces !== 'undefined') {
-        PrimeFaces.addCallback('onAjaxComplete', initGraphFromSelectedRadio);
-    }
 })();

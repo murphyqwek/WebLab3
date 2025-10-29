@@ -23,11 +23,7 @@ canvas.addEventListener('click', function (e) {
         return;
     }
 
-    console.log(x, y);
-
     setFormValues(x, y);
-
-
 
     submitForm();
 });

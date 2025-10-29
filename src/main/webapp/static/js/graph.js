@@ -162,7 +162,7 @@ function getPointsFromTable() {
             const r = parseFloat(cells[0].textContent.trim());
             const x = parseFloat(cells[1].textContent.trim());
             const y = parseFloat(cells[2].textContent.trim());
-            const isHit = cells[2].textContent.trim() === "Да";
+            const isHit = cells[3].textContent.trim() === "Да";
 
             // Проверяем, что значения числовые
             if (!isNaN(x) && !isNaN(y)) {
@@ -177,6 +177,7 @@ function getPointsFromTable() {
 function drawPoints() {
     const points = getPointsFromTable();
     let r = getR();
+
 
     points.forEach(point => {
         let x = point.x;
