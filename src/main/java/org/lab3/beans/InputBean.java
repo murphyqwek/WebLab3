@@ -3,6 +3,7 @@ import jakarta.enterprise.context.ConversationScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.lab3.Point;
 
 import java.io.Console;
 import java.io.Serializable;
@@ -14,6 +15,9 @@ public class InputBean implements Serializable {
 
     @Inject
     private HitCheckBean hitCheckBean;
+
+    @Inject
+    private CollectionHitBean collectionHitBean;
 
     private int x;
     private float y;
@@ -51,5 +55,8 @@ public class InputBean implements Serializable {
     public void submit() {
         testString = hitCheckBean.isHit(x, y, r) ? "Попал" : "Не попал";
         System.out.println(testString);
+        boolean isHit = hitCheckBean.isHit(x, y, r);
+        Point point = new Point(x, y, r, isHit, "bruh", 0);
+        collectionHitBean.getHitList().add(point);
     }
 }
