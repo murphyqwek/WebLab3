@@ -48,7 +48,7 @@
                                   display="xValueInput"
                                   for="xValue"
                         />
-                        <h:inputHidden id="xValue"/>
+                        <h:inputHidden value="#{input.x}" id="xValue"/>
                     </div>
                 </div>
 
@@ -59,6 +59,7 @@
                                      styleClass="y-input"
                                      placeholder="Введите число от -5 до 5"
                                      required="true"
+                                     value="#{input.y}"
                                      requiredMessage="Поле Y обязательно для заполнения">
                             <f:validateDoubleRange minimum="-5" maximum="5"/>
                         </h:inputText>
@@ -71,7 +72,7 @@
                     <div class="radio-container">
                         <h:selectOneRadio id="rRadio"
                                           required="true"
-                                          value="1"
+                                          value="#{input.r}"
                                           requiredMessage="Выберите значение R">
                             <f:selectItem itemValue="1" itemLabel="1"/>
                             <f:selectItem itemValue="2" itemLabel="2"/>
@@ -80,12 +81,16 @@
                             <f:selectItem itemValue="5" itemLabel="5"/>
                         </h:selectOneRadio>
                     </div>
-                    <p:message for="rRadio" display="text" styleClass="error-message"/>
                 </div>
 
                 <div class="form-group">
-                    <h:button        value="Отправить"
-                                     styleClass="submit-button"/>
+                    <p:commandButton id="submitButton" value="Отправить"
+                                     styleClass="submit-button"
+                                     update=":debug"
+                                     process="@form"
+                                     action="#{input.submit}"
+                                     ajax="true"/>
+
                 </div>
 
             </h:form>
@@ -117,8 +122,11 @@
         </div>
     </div>
 
-    <div class="footer">
-    </div>
+    <h:panelGroup id="panelFooter" layout="block">
+        <div class="footer" >
+            <h:outputText value="#{input.testString}" id="debug"/>
+        </div>
+    </h:panelGroup>
 
 
     <script src="static/js/graph.js"/>
