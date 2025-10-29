@@ -7,6 +7,7 @@
             const r = parseFloat(target.value);
             if (!isNaN(r)) {
                 drawGraph(r);
+                drawPoints();
             }
         }
     }
@@ -17,6 +18,7 @@
             const r = parseFloat(selected.value);
             if (!isNaN(r)) {
                 drawGraph(r);
+                drawPoints();
             }
         }
     }

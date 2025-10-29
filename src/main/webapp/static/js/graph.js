@@ -152,4 +152,54 @@ function drawAxesLabels() {
     ctx.fillText('Y', centerX + 15, 10 + graphOffset);
 }
 
+function getPointsFromTable() {
+    const points = [];
+    const rows = document.querySelectorAll('.results-table tbody tr:not(.no-data-row)');
+
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length >= 3) {
+            const r = parseFloat(cells[0].textContent.trim());
+            const x = parseFloat(cells[1].textContent.trim());
+            const y = parseFloat(cells[2].textContent.trim());
+            const isHit = cells[2].textContent.trim() === "Да";
+
+            // Проверяем, что значения числовые
+            if (!isNaN(x) && !isNaN(y)) {
+                points.push({ r, x, y, isHit });
+            }
+        }
+    });
+
+    return points;
+}
+
+function drawPoints() {
+    const points = getPointsFromTable();
+    let r = getR();
+
+    points.forEach(point => {
+        let x = point.x;
+        let y = point.y;
+
+        let graphX = x * rLength / r + centerX
+        let graphY = -y * rLength / r + centerY;
+
+        ctx.beginPath();
+        ctx.arc(graphX, graphY, 4, 0, Math.PI * 2);
+        ctx.fillStyle = point.isHit ? 'green' : 'red';
+        ctx.fill();
+        ctx.stroke();
+    });
+}
+
+function getCanvasCoords(xClick, yClick, r) {
+    let xPlot = (xClick - centerX )* r / rLength;
+    let yPlot = -(yClick - centerY) * r / rLength;
+
+    return { x: xPlot, y: yPlot};
+}
+
 drawGraph(1);
+
+drawPoints();
