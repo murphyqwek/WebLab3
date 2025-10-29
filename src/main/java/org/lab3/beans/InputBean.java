@@ -7,6 +7,8 @@ import org.lab3.Point;
 
 import java.io.Console;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Named("input")
 @ConversationScoped
@@ -53,10 +55,13 @@ public class InputBean implements Serializable {
     }
 
     public void submit() {
+        long startTime = System.nanoTime();
+        String startTimeDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
         testString = hitCheckBean.isHit(x, y, r) ? "Попал" : "Не попал";
         System.out.println(testString);
         boolean isHit = hitCheckBean.isHit(x, y, r);
-        Point point = new Point(x, y, r, isHit, "bruh", 0);
+        long endTime = System.nanoTime();
+        Point point = new Point(x, y, r, isHit, startTimeDate, endTime - startTime);
         collectionHitBean.getHitList().add(point);
     }
 }
