@@ -1,11 +1,9 @@
 package org.lab3.beans;
 import jakarta.enterprise.context.ConversationScoped;
-import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import org.lab3.Point;
 
-import java.io.Console;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,7 +22,6 @@ public class InputBean implements Serializable {
     private int x;
     private float y;
     private int r = 1;
-    private String testString;
 
     public int getX() {
         return x;
@@ -50,15 +47,9 @@ public class InputBean implements Serializable {
         this.r = r;
     }
 
-    public String getTestString() {
-        return testString;
-    }
-
     public void submit() {
         long startTime = System.nanoTime();
         String startTimeDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-        testString = hitCheckBean.isHit(x, y, r) ? "Попал" : "Не попал";
-        System.out.println(testString);
         boolean isHit = hitCheckBean.isHit(x, y, r);
         long endTime = System.nanoTime();
         Point point = new Point(x, y, r, isHit, startTimeDate, endTime - startTime);

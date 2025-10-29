@@ -90,7 +90,7 @@
                 <div class="form-group">
                     <p:commandButton id="submitButton" value="Отправить"
                                      styleClass="submit-button"
-                                     update="@form :debug :table-panel growl"
+                                     update="@form :table-panel growl"
                                      process="@form"
                                      action="#{input.submit}"
                                      oncomplete="drawGraph(getR()); drawPoints()"
@@ -126,7 +126,7 @@
                             <td>#{p.y}</td>
                             <td>#{p.hit ? 'Да' : 'Нет'}</td>
                             <td>#{p.startTime}</td>
-                            <td>#{p.executionTime} мс</td>
+                            <td>#{p.executionTime} нс</td>
                         </tr>
                     </ui:repeat>
 
@@ -142,11 +142,8 @@
     </div>
 
 
-    <h:panelGroup id="panelFooter" layout="block">
-        <div class="footer" >
-            <h:outputText value="#{input.testString}" id="debug"/>
-        </div>
-    </h:panelGroup>
+    <div class="footer" >
+    </div>
 
     <script src="static/js/utils.js"/>
     <script src="static/js/graph.js"/>
