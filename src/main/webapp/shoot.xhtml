@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <h:head>
     <title>Лабораторная работа #3</title>
@@ -48,7 +49,9 @@
                                   display="xValueInput"
                                   for="xValue"
                         />
-                        <h:inputHidden value="#{input.x}" id="xValue"/>
+                        <h:inputHidden value="#{input.x}" id="xValue">
+                            <f:validator validatorId="xValidation"/>
+                        </h:inputHidden>
                     </div>
                 </div>
 
@@ -61,10 +64,10 @@
                                      required="true"
                                      value="#{input.y}"
                                      requiredMessage="Поле Y обязательно для заполнения">
-                            <f:validateDoubleRange minimum="-5" maximum="5"/>
+                            <f:validator validatorId="yValidation"/>
+                            <f:converter converterId="yConverter"/>
                         </h:inputText>
                     </div>
-                    <p:message for="yInput" display="text" styleClass="error-message"/>
                 </div>
 
                 <div class="form-group">
@@ -79,6 +82,7 @@
                             <f:selectItem itemValue="3" itemLabel="3"/>
                             <f:selectItem itemValue="4" itemLabel="4"/>
                             <f:selectItem itemValue="5" itemLabel="5"/>
+                            <f:validator validatorId="rValidation"/>
                         </h:selectOneRadio>
                     </div>
                 </div>
@@ -86,9 +90,10 @@
                 <div class="form-group">
                     <p:commandButton id="submitButton" value="Отправить"
                                      styleClass="submit-button"
-                                     update="@form :debug"
+                                     update="@form :debug :table-panel growl"
                                      process="@form"
                                      action="#{input.submit}"
+                                     oncomplete="drawGraph(getR()); drawPoints()"
                                      ajax="true"/>
 
                 </div>
@@ -99,28 +104,43 @@
             <canvas id="graph" width="200" height="200"> </canvas>
         </div>
 
-        <div class="table-div">
-            <h3>Результаты</h3>
-            <table class="results-table">
-                <thead class="table-header">
-                <tr>
-                    <th>R</th>
-                    <th>X</th>
-                    <th>Y</th>
-                    <th>Попадание</th>
-                    <th>Время начала</th>
-                    <th>Время выполнения</th>
-                </tr>
-                </thead>
-                <tbody>
+        <h:panelGroup class='table-div' id="table-panel" layout="block">
+                <h3>Результаты</h3>
+                <table class="results-table" >
+                    <thead class="table-header">
+                    <tr>
+                        <th>R</th>
+                        <th>X</th>
+                        <th>Y</th>
+                        <th>Попадание</th>
+                        <th>Время начала</th>
+                        <th>Время выполнения</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-                <tr class="no-data-row">
-                    <td colspan="6">Нет данных</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+                    <ui:repeat value="#{collection.hitList}" var="p">
+                        <tr>
+                            <td>#{p.r}</td>
+                            <td>#{p.x}</td>
+                            <td>#{p.y}</td>
+                            <td>#{p.hit ? 'Да' : 'Нет'}</td>
+                            <td>#{p.startTime}</td>
+                            <td>#{p.executionTime} мс</td>
+                        </tr>
+                    </ui:repeat>
+
+                    <ui:fragment rendered="#{empty collection.hitList}">
+                        <tr class="no-data-row">
+                            <td colspan="6">Нет данных</td>
+                        </tr>
+                    </ui:fragment>
+                    </tbody>
+                </table>
+
+        </h:panelGroup>
     </div>
+
 
     <h:panelGroup id="panelFooter" layout="block">
         <div class="footer" >
@@ -128,11 +148,10 @@
         </div>
     </h:panelGroup>
 
-
+    <script src="static/js/utils.js"/>
     <script src="static/js/graph.js"/>
     <script src="static/js/rChangeHandler.js"/>
     <script src="static/js/clickGraphHandler.js"/>
-    <script src="static/js/utils.js"/>
     <script src="static/js/validation.js"/>
 </h:body>
 </html>
