@@ -1,32 +1,36 @@
-function setupRRadioListener() {
-    const radioButtons = document.querySelectorAll('input[type="radio"][name*="rRadio"]');
+(function () {
+    'use strict';
 
-    radioButtons.forEach(radio => {
-        radio.addEventListener('change', function() {
-            const r = parseInt(this.value);
-
-            drawGraph(r);
-        });
-    });
-
-    const selectedRadio = document.querySelector('input[type="radio"][name*="rRadio"]:checked');
-    if (selectedRadio) {
-        if (window.updateGraphWithR) {
-            updateGraphWithR(parseFloat(selectedRadio.value));
+    function handleRadioChange(event) {
+        const target = event.target;
+        if (target.matches && target.matches('input[type="radio"][name$="rRadio"]')) {
+            const r = parseFloat(target.value);
+            if (!isNaN(r)) {
+                drawGraph(r);
+            }
         }
     }
-}
 
-function updateGraphWithR(r) {
-    drawGraph(r);
-}
+    function initGraphFromSelectedRadio() {
+        const selected = document.querySelector('input[type="radio"][name$="rRadio"]:checked');
+        if (selected) {
+            const r = parseFloat(selected.value);
+            if (!isNaN(r)) {
+                drawGraph(r);
+            }
+        }
+    }
 
-document.addEventListener('DOMContentLoaded', function() {
-    setupRRadioListener();
-});
+    document.addEventListener('change', handleRadioChange, false);
 
-if (window.PrimeFaces) {
-    PrimeFaces.onAjaxUpdate(function() {
-        setTimeout(setupRRadioListener, 50);
-    });
-}
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initGraphFromSelectedRadio);
+    } else {
+        initGraphFromSelectedRadio();
+    }
+
+    // Поддержка AJAX в PrimeFaces
+    if (typeof window.PrimeFaces !== 'undefined') {
+        PrimeFaces.addCallback('onAjaxComplete', initGraphFromSelectedRadio);
+    }
+})();

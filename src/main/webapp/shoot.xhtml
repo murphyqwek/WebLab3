@@ -86,7 +86,7 @@
                 <div class="form-group">
                     <p:commandButton id="submitButton" value="Отправить"
                                      styleClass="submit-button"
-                                     update=":debug"
+                                     update="@form :debug"
                                      process="@form"
                                      action="#{input.submit}"
                                      ajax="true"/>
