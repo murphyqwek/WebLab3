@@ -53,6 +53,6 @@ public class InputBean implements Serializable {
         boolean isHit = hitCheckBean.isHit(x, y, r);
         long endTime = System.nanoTime();
         Point point = new Point(x, y, r, isHit, startTimeDate, endTime - startTime);
-        collectionHitBean.getHitList().add(point);
+        collectionHitBean.savePoint(point);
     }
 }

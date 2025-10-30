@@ -2,8 +2,17 @@
 <persistence xmlns="https://jakarta.ee/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_2.xsd"
-             version="3.2">
-    <persistence-unit name="default">
+             version="3.0">
+    <persistence-unit name="pointPU" transaction-type="RESOURCE_LOCAL">
+        <class>org.lab3.Point</class>
 
+        <properties>
+            <property name="jakarta.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:derby:target/database;create=true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="jakarta.persistence.jdbc.user" value=""/>
+            <property name="jakarta.persistence.jdbc.password" value=""/>
+            <property name="hibernate.show_sql" value="false"/>
+        </properties>
     </persistence-unit>
 </persistence>
